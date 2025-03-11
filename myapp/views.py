@@ -27,6 +27,7 @@ def course_list(request):
     courses = Courses.objects.all()
     return render(request, "course_list.html", {"courses": courses})
 
+
 def update(request,id):
     cors_obj = Courses.objects.get(id=id)
     if request.method == 'POST':
@@ -38,3 +39,9 @@ def update(request,id):
         cors_obj.save()
         return redirect('/')
     return render(request, 'Update.html', {'data': cors_obj})
+
+
+def delete(request,id):
+    cors_obj = Courses.objects.get(id=id)
+    cors_obj.delete()
+    return redirect('/')

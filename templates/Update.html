@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Course</title>
+    <title>Update Course</title>
 </head>
 <body>
-    <h2>Create a New Course</h2>
+    <h2>Update Course</h2>
     <form enctype="multipart/form-data" method="post">
         {% csrf_token %}
 
@@ -22,7 +22,7 @@
         <label for="price">Price ($):</label><br>
         <input type="number" id="price" name="price" step="0.01" value="{{data.price}}" required><br><br>
 
-        <button type="submit">Create Course</button>
+        <button type="submit">Update Course</button>
     </form>
 </body>
 </html>

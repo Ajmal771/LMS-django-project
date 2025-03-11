@@ -8,26 +8,19 @@
 </head>
 <body>
 {% for x in courses %}
-<div class="row">
+<div class="row" style="display: inline;">
  <div class="card" style="width: 18rem;">
   <ul class="list-group list-group-flush">
     <li class="list-group-item">Course = {{x.title}}</li>
     <li class="list-group-item">Category = {{x.category}}</li>
     <li class="list-group-item">Description = {{x.description}}</li>
-    <li class="list-group-item">Description = {{x.price}}</li>
-
+    <li class="list-group-item">Fees = {{x.price}}</li>
   </ul>
-</div>
-<div class="card" style="width: 18rem;">
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Course = {{x.title}}</li>
-    <li class="list-group-item">Category = {{x.category}}</li>
-    <li class="list-group-item">Description = {{x.description}}</li>
-    <li class="list-group-item">Description = {{x.price}}</li>
+   <a href="/update/{{x.id}}" class="btn btn-primary">Update</a>
+   <a href="/delete/{{x.id}}" class="btn btn-primary">Delete</a>
 
-  </ul>
 </div>
-    </div>
 {% endfor %}
+
 </body>
 </html>
