@@ -9,21 +9,12 @@ class Courses(models.Model):
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=200, default="General")
     description = models.TextField()
-    price = models.DecimalField(max_digits=10,decimal_places=2, default=0.00)
-
-    class Meta:
-        db_table = 'courses'
-
-
-class Lesson(models.Model):
-    id = models.AutoField(primary_key=True)
-    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    content = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     video_url = models.URLField(blank=True, null=True)
 
     class Meta:
-        db_table = 'lessons'
+        db_table = 'courses'
 
 
 class Enrollment(models.Model):
@@ -37,3 +28,13 @@ class Quiz(models.Model):
     course = models.ForeignKey(Courses, on_delete=models.CASCADE)
     question = models.TextField()
     correct_answer = models.CharField(max_length=200)
+
+
+class Register(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
+    email = models.EmailField()
+    password = models.CharField(max_length=100)
+
+    class Meta:
+        db_table = 'Register'

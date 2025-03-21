@@ -382,6 +382,7 @@ p {
     </style>
 </head>
 <body>
+
     <header>
         <div class="logo">
             {% load static %}
@@ -398,7 +399,7 @@ p {
             </ul>
         </nav>
         <div class="icons">
-            <img src="{% static 'images/user-icon.png' %}" alt="User">
+            <a href="/logout"><img src="{% static 'images/user-icon.png' %}" alt="User" ></a>
             <img src="{% static 'images/search-icon.png' %}" alt="Search">
         </div>
     </header>
@@ -409,51 +410,52 @@ p {
             <p>Technology is bringing a massive wave of evolution on learning things in different ways.</p>
             <div class="buttons">
                 <a href="#" class="btn btn-orange">Get Started</a>
-                <a href="#" class="btn btn-blue">View Courses</a>
+                <a href="/course_list" class="btn btn-blue">View Courses</a>
             </div>
         </div>
         <div class="hero-image">
             <img src="{% static 'images/hero image.png' %}" alt="Learning Illustration">
         </div>
     </section>
+
 <section class="featured-courses">
         <h2>Featured Courses</h2>
         <p>Discover Your Perfect Program In Our Courses.</p>
-
+{% for x in data %}
         <div class="courses-container">
             <div class="course-card">
-                <img src="course1.jpg" alt="LMS Project">
+                <img class="card-img-top property-image" src="{{x.image.url}}" alt="LMS Project">
                 <div class="course-info">
-                    <h3>Online Video Course Project (LMS Project)</h3>
-                    <p>Python Django</p>
+                    <h3>{{x.title}}</h3>
+                    <p>{{x.category}}</p>
                     <div class="rating">⭐ ⭐ ⭐ ⭐ ⭐ 5.45 (5.8k+ reviews)</div>
                     <p>📚 1 lesson ⏳ 220h 30m</p>
-                    <p class="price"><s>₹100</s> ₹400</p>
+                    <p class="price">{{x.price}}</p>
                 </div>
             </div>
+{% endfor %}
+<!--            <div class="course-card">-->
+<!--                <img src="course2.jpg" alt="E-commerce Project">-->
+<!--                <div class="course-info">-->
+<!--                    <h3>E-commerce Website Project Using PHP</h3>-->
+<!--                    <p>PHP</p>-->
+<!--                    <div class="rating">⭐ ⭐ ⭐ ⭐ ⭐ 5.45 (5.8k+ reviews)</div>-->
+<!--                    <p>📚 0 lessons ⏳ 698h 30m</p>-->
+<!--                    <p class="price"><s>₹500</s> ₹400</p>-->
+<!--                </div>-->
+<!--            </div>-->
 
-            <div class="course-card">
-                <img src="course2.jpg" alt="E-commerce Project">
-                <div class="course-info">
-                    <h3>E-commerce Website Project Using PHP</h3>
-                    <p>PHP</p>
-                    <div class="rating">⭐ ⭐ ⭐ ⭐ ⭐ 5.45 (5.8k+ reviews)</div>
-                    <p>📚 0 lessons ⏳ 698h 30m</p>
-                    <p class="price"><s>₹500</s> ₹400</p>
-                </div>
-            </div>
-
-            <div class="course-card">
-                <img src="course3.jpg" alt="Student Management System">
-                <div class="course-info">
-                    <h3>Student Management System Project Using Django</h3>
-                    <p>Python Django</p>
-                    <div class="rating">⭐ ⭐ ⭐ ⭐ ⭐ 5.45 (5.8k+ reviews)</div>
-                    <p>📚 9 lessons ⏳ 50h 2m</p>
-                    <p class="price free">FREE</p>
-                </div>
-            </div>
-        </div>
+<!--            <div class="course-card">-->
+<!--                <img src="course3.jpg" alt="Student Management System">-->
+<!--                <div class="course-info">-->
+<!--                    <h3>Student Management System Project Using Django</h3>-->
+<!--                    <p>Python Django</p>-->
+<!--                    <div class="rating">⭐ ⭐ ⭐ ⭐ ⭐ 5.45 (5.8k+ reviews)</div>-->
+<!--                    <p>📚 9 lessons ⏳ 50h 2m</p>-->
+<!--                    <p class="price free">FREE</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </section>
 
 <section class="features">
@@ -566,13 +568,6 @@ p {
                 <a href="#">Privacy Policy</a>
                 <a href="#">Web Use Policy</a>
                 <a href="#">Cookie Policy</a>
-            </div>
-            <div class="language-selector">
-                <select>
-                    <option>English</option>
-                    <option>Español</option>
-                    <option>Français</option>
-                </select>
             </div>
         </div>
     </footer>
