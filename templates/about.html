@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMatrix - LMS</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ffe5d9, #dbe2ef);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.icons img {
+    width: 25px;
+    margin-left: 15px;
+}
+
+.icons {
+    display: inline;
+}
+.icons a {
+    text-decoration: None;
+    margin: 0px 10px;
+}
+
+        .footer {
+    background-color: #f5f5f5;
+    padding: 40px 20px;
+}
+        .footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-column {
+    text-align: left;
+}
+
+.company-info {
+    max-width: 250px;
+}
+
+.logo {
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.footer-column h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 8px;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: #666;
+    font-size: 14px;
+}
+
+.footer-column ul li a:hover {
+    color: #000;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.social-icons a {
+    font-size: 18px;
+    color: #666;
+    text-decoration: none;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-links {
+    display: flex;
+    gap: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #666;
+}
+
+.footer-links a:hover {
+    color: #000;
+}
+
+.language-selector select {
+    padding: 5px;
+    font-size: 14px;
+}
+       </style>
+</head>
+<body>
+<header>
+        <div class="logo">
+            {% load static %}
+            <img src="{% static 'images/logo11.png.png' %}" alt="CodingEx Logo">
+            <h1 style="font-weight: bold;">EduMatrix</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/course_list">Courses</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">My Courses</a></li>
+            </ul>
+        </nav>
+        <div class="icons" >
+            <a href=""><img src="{% static 'images/user-icon.png' %}" alt="User" ></a>
+            <img src="{% static 'images/search-icon.png' %}" alt="Search">
+            <a href="/logout" class="text-dark" style="font-weight: bold;">Logout</a>
+            <a href="/view_cart" class="text-dark" style="font-weight: bold;">Carts</a>
+        </div>
+    </header>
+<footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column company-info">
+                <img src="{% static 'images/logo11.png.png' %}" alt="CodingEx Logo" class="logo">
+                <p>329 Queensberry Street, North Melbourne VIC 3051, Australia.</p>
+                <p>123 456 7890</p>
+                <p>support@skola.com</p>
+                <div class="social-icons">
+                    <a href="#"><i>🌐</i></a>
+                    <a href="#"><i>🐦</i></a>
+                    <a href="#"><i>📸</i></a>
+                    <a href="#"><i>🔗</i></a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Our Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Student Perks</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Affiliate Program</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Topics</h3>
+                <ul>
+                    <li><a href="#">HTML</a></li>
+                    <li><a href="#">CSS</a></li>
+                    <li><a href="#">Design</a></li>
+                    <li><a href="#">JavaScript</a></li>
+                    <li><a href="#">Ruby</a></li>
+                    <li><a href="#">PHP</a></li>
+                    <li><a href="#">Android</a></li>
+                    <li><a href="#">Development Tools</a></li>
+                    <li><a href="#">Business</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Tracks</h3>
+                <ul>
+                    <li><a href="#">Web Design</a></li>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Rails Development</a></li>
+                    <li><a href="#">PHP Development</a></li>
+                    <li><a href="#">Android Development</a></li>
+                    <li><a href="#">Starting a Business</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Documentation</a></li>
+                    <li><a href="#">Forums</a></li>
+                    <li><a href="#">Language Packs</a></li>
+                    <li><a href="#">Release Status</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Copyright © 2021 CreativeLayers. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">Site Map</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Web Use Policy</a>
+                <a href="#">Cookie Policy</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

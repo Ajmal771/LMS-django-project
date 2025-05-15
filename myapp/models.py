@@ -10,6 +10,7 @@ class Courses(models.Model):
     category = models.CharField(max_length=200, default="General")
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    lesson = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
     video_url = models.URLField(blank=True, null=True)
 
@@ -38,3 +39,21 @@ class Register(models.Model):
 
     class Meta:
         db_table = 'Register'
+
+
+class Bookmark(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE,related_name='Bookmark')
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='Bookmark')
+
+    class Meta:
+        db_table = 'Bookmark'
+
+
+class Cart(models.Model):
+    id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Register, on_delete=models.CASCADE, related_name='Cart')
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE, related_name='Cart')
+
+    class Meta:
+        db_table = 'Cart'

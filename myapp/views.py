@@ -1,15 +1,20 @@
 from django.shortcuts import render,redirect
-from .models import Courses,Register
+from .models import Courses,Register, Bookmark, Cart
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
 def home(request):
     courses = Courses.objects.all()[:3]
-    user = request.session.get('user')
-    if user:
-        return render(request, 'home.html', {'data': courses})
-    else:
-        return redirect('/')
+    return render(request, 'home.html', {'data': courses})
+
+
+def course_page(request, id):
+    if 'user' not in request.session:
+        return redirect(f'/login/?next=/view_more/{id}')
+
+    course_obj = Courses.objects.get(id=id)
+    return render(request, 'course_details_page.html', {'data': course_obj})
 
 
 def about(request):
@@ -56,12 +61,17 @@ def delete(request,id):
 
 def register(request):
     if request.method == 'POST':
-        rgst_obj = Register()
-        rgst_obj.name = request.POST['name']
-        rgst_obj.email = request.POST['email']
-        rgst_obj.password = request.POST['password']
-        rgst_obj.save()
-        return redirect('/home')
+        email = request.POST['email']
+        try:
+            existing_user = Register.objects.get(email=email)
+            return render(request, 'Registration_form.html', {'error': 'User with this email already exist'})
+        except Register.DoesNotExist:
+            rgst_obj = Register()
+            rgst_obj.name = request.POST['name']
+            rgst_obj.email = email
+            rgst_obj.password = request.POST['password']
+            rgst_obj.save()
+            return redirect('/')
     return render(request, 'Registration_form.html')
 
 
@@ -69,11 +79,12 @@ def login(request):
     if request.method == "POST":
         name = request.POST['name']
         password = request.POST['password']
-        user = Register.objects.get(name=name, password=password)
-        if user:
+        try:
+            user = Register.objects.get(name=name, password=password)
             request.session['user'] = user.id
-            return redirect('/home')
-        else:
+            next_url = request.GET.get('next', '/home')  # default to /home
+            return redirect(next_url)
+        except Register.DoesNotExist:
             return render(request, 'login_form.html', {'error': 'Invalid username or password'})
     return render(request, 'login_form.html')
 
@@ -82,3 +93,76 @@ def logout(request):
     del request.session['user']
     return redirect('/')
 
+
+def bookmark(request,id):
+    if 'user' in request.session:
+        user = Register.objects.get(id=request.session['user'])
+        print(user)
+        course = Courses.objects.get(id=id)
+        cart = Bookmark(user=user, course=course)
+        cart.save()
+        return redirect('/view_bookmark')
+    else:
+        redirect('/')
+
+
+def view_bookmark(request):
+    if 'user' in request.session:
+        cart_obj = Bookmark.objects.filter(user_id=request.session['user'])
+        total = 0
+        for item in cart_obj:
+            total += item.course.price
+        return render(request, 'bookmark.html', {'data': cart_obj, 'total': total})
+    else:
+        return redirect('/')
+
+
+def remove_bookmark(request, id):
+    crt_obje = Bookmark.objects.get(id=id)
+    crt_obje.delete()
+    return redirect('/view_bookmark')
+
+
+def cart(request,id):
+    if 'user' in request.session:
+        user = Register.objects.get(id=request.session['user'])
+        print(user)
+        course = Courses.objects.get(id=id)
+        cart = Cart(user=user, course=course)
+        cart.save()
+        return redirect('/view_cart')
+    else:
+        redirect('/')
+
+
+def view_cart(request):
+    if 'user' in request.session:
+        cart_obj = Cart.objects.filter(user_id=request.session['user'])
+        total = 0
+        for item in cart_obj:
+            total += item.course.price
+        return render(request, 'View_cart.html', {'data': cart_obj, 'total': total})
+    else:
+        return redirect('/')
+
+
+def remove_cart(request, id):
+    crt_obje = Cart.objects.get(id=id)
+    crt_obje.delete()
+    return redirect('/view_cart')
+
+
+def checkout_page(request):
+    if 'user' in request.session:
+        cart_obj = Cart.objects.filter(user_id=request.session['user'])
+        total = 0
+        for item in cart_obj:
+            total += item.course.price
+        return render(request, 'Checkout_page.html', {'data': cart_obj, 'total': total})
+    else:
+        return redirect('/')
+
+
+def payment_page(request, id):
+    course_obj = Courses.objects.get(id=id)
+    return render(request, 'payment_page.html', {'data': course_obj})
