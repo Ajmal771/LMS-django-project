@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import Courses,Register, Bookmark, Cart
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 # Create your views here.
 
 
@@ -82,7 +83,7 @@ def login(request):
         try:
             user = Register.objects.get(name=name, password=password)
             request.session['user'] = user.id
-            next_url = request.GET.get('next', '/home')  # default to /home
+            next_url = request.GET.get('next', '/')  # default to /home
             return redirect(next_url)
         except Register.DoesNotExist:
             return render(request, 'login_form.html', {'error': 'Invalid username or password'})
@@ -90,7 +91,8 @@ def login(request):
 
 
 def logout(request):
-    del request.session['user']
+    if 'user' in request.session:
+        del request.session['user']
     return redirect('/')
 
 
@@ -166,3 +168,24 @@ def checkout_page(request):
 def payment_page(request, id):
     course_obj = Courses.objects.get(id=id)
     return render(request, 'payment_page.html', {'data': course_obj})
+
+
+def video(request, id):
+    video_obj = Courses.objects.get(id=id)
+    return render(request, 'video_page.html',{'video': video_obj})
+
+
+def search_results(request):
+    query = request.GET.get('q')
+    courses = []
+
+    if query:
+        courses = Courses.objects.filter(
+            Q(title__icontains=query) |
+            Q(description__icontains=query)
+        )
+
+    return render(request, 'search_results.html', {
+        'query': query,
+        'courses': courses
+    })

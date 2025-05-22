@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home),
+    path('', views.home, name='home'),
     path('view_more/<int:id>/', views.course_page),
     path('about/', views.about),
     path('add/', views.add),
@@ -39,5 +39,7 @@ urlpatterns = [
     path('view_cart/', views.view_cart),
     path('remove_cart/<int:id>/', views.remove_cart),
     path('checkout_page/', views.checkout_page),
-    path('payment_page/<int:id>/', views.payment_page)
+    path('payment_page/<int:id>/', views.payment_page),
+    path('video/<int:id>', views.video),
+    path('search/', views.search_results, name='search_results'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMatrix - LMS</title>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<style>
+      <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #ffe5d9,#dbe2ef);
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    margin-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.icons img {
+    width: 25px;
+    margin-left: 15px;
+}
+
+.icons {
+    display: inline;
+}
+.icons a {
+    text-decoration: None;
+    margin: 0px 10px;
+}
+</style>
+</head>
+<body>
+<header>
+        <div class="logo">
+            {% load static %}
+            <img src="{% static 'images/logo11.png.png' %}" alt="CodingEx Logo">
+            <h1 style="font-weight: bold;">EduMatrix</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/course_list">Courses</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="#">My Courses</a></li>
+            </ul>
+        </nav>
+       <form method="get" action="{% url 'search_results' %}" class="d-flex">
+    <input name="q" class="form-control me-2" type="search" placeholder="Search..." aria-label="Search">
+    <button class="btn btn-outline-primary" type="submit">Search</button>
+</form>
+
+        <div class="icons" >
+        <a href="" class="user-profile">
+            <img src="{% static 'images/user-icon.png' %}" alt="User">
+            {% if user.is_authenticated %}
+                <span class="username">{{ user.username }}</span>
+            {% endif %}
+        </a>
+            <a href="/logout" class="text-dark" style="font-weight: bold;">Logout</a>
+            <a href="/view_cart" class="text-dark" style="font-weight: bold;">Carts</a>
+        </div>
+    </header>
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
