@@ -414,7 +414,7 @@ p {
         <a href="" class="user-profile">
             <img src="{% static 'images/user-icon.png' %}" alt="User">
             {% if user.is_authenticated %}
-                <span class="username">{{ user.username }}</span>
+                <span class="username text-dark" >Welcome, {{request.user.username }}</span>
             {% endif %}
         </a>
             <a href="/logout" class="text-dark" style="font-weight: bold;">Logout</a>
@@ -456,7 +456,7 @@ p {
 {% else %}
     <a href="/login/?next=/view_more/{{ x.id }}" class="btn btn-warning w-100 mb-2">Login to View</a>
 {% endif %}
-                    <a href="#"><i class="bi bi-bookmark"></i></a>
+                    <a href="bookmark/{{x.id}}/"><i class="bi bi-bookmark"></i></a>
                 </div>
             </div>
         </div>
@@ -468,6 +468,7 @@ p {
 <section class="features">
         <h2>New App Features</h2>
         <p>Discover Your Perfect Program In Our Courses.</p>
+
         <div class="feature-container" >
             <a href="/view_bookmark" style="text-decoration: None;">
             <div class="feature-box" >

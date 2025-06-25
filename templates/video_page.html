@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ videos.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #555;
+        }
+        iframe {
+            margin-top: 20px;
+            width: 100%;
+            height: 480px;
+            border: none;
+            border-radius: 8px;
+        }
+        .no-video {
+            color: #888;
+            font-style: italic;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-<a width="800" height="700" src="{{video.video_url}}" title="{{video.title}}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ></a>
+    <div class="container">
+        <h1>{{ videos.title }}</h1>
+        <p>{{ videos.description }}</p>
+
+        {% if videos.video_url %}
+            <h2>Course Video</h2>
+            <iframe
+                src="{{ videos.video_url }}"
+                allowfullscreen>
+            </iframe>
+        {% else %}
+            <p class="no-video">No video available for this course.</p>
+        {% endif %}
+    </div>
 </body>
 </html>

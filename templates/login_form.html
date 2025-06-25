@@ -84,7 +84,14 @@
 
     <div class="login-right">
       <h4 class="mb-4 text-center">Login to Your Account</h4>
-
+         {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        {% endfor %}
+    {% endif %}
       {% if error %}
         <div class="alert alert-danger">{{ error }}</div>
       {% endif %}

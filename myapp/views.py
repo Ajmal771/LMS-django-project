@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Courses,Register, Bookmark, Cart
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from django.contrib import messages
 # Create your views here.
 
 
@@ -105,7 +106,8 @@ def bookmark(request,id):
         cart.save()
         return redirect('/view_bookmark')
     else:
-        redirect('/')
+        messages.error(request, 'Please login to bookmark courses.')
+        return redirect('/login')
 
 
 def view_bookmark(request):
@@ -116,7 +118,8 @@ def view_bookmark(request):
             total += item.course.price
         return render(request, 'bookmark.html', {'data': cart_obj, 'total': total})
     else:
-        return redirect('/')
+        messages.error(request, 'Please login to bookmark courses.')
+        return redirect('/login')
 
 
 def remove_bookmark(request, id):
@@ -172,7 +175,7 @@ def payment_page(request, id):
 
 def video(request, id):
     video_obj = Courses.objects.get(id=id)
-    return render(request, 'video_page.html',{'video': video_obj})
+    return render(request, 'video_page.html',{'videos': video_obj})
 
 
 def search_results(request):

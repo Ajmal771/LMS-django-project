@@ -12,7 +12,7 @@ class Courses(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     lesson = models.IntegerField(default=0)
     image = models.ImageField(upload_to='images/', null=True, blank=True)
-    video_url = models.URLField(blank=True, null=True)
+    video_url = models.URLField(max_length=500, blank=True, null=True)
 
     class Meta:
         db_table = 'courses'
