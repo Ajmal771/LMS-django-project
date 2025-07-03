@@ -1,0 +1,267 @@
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become an Instructor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+        .floating-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 min-h-screen">
+
+
+    <!-- Your existing HTML content here -->
+    <div class="max-w-7xl mx-auto px-6 py-12">
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <!-- Left Side - Keep your existing illustration -->
+            <div class="relative">
+                <!-- Your existing illustration code -->
+                <div class="relative z-10">
+                    <!-- Main Illustration Container -->
+                    <div class="relative bg-white rounded-full p-8 shadow-2xl floating-animation">
+                        <!-- Central Figure -->
+                        <div class="w-80 h-80 mx-auto relative">
+                            <!-- Teacher Figure -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative">
+                                    <!-- Body -->
+                                    <div class="w-24 h-32 bg-gradient-to-b from-purple-200 to-purple-300 rounded-full mx-auto"></div>
+                                    <!-- Head -->
+                                    <div class="w-16 h-16 bg-amber-200 rounded-full mx-auto -mt-8 relative">
+                                        <div class="absolute top-3 left-4 w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="absolute top-3 right-4 w-2 h-2 bg-gray-700 rounded-full"></div>
+                                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4 h-1 bg-gray-700 rounded-full"></div>
+                                    </div>
+                                    <!-- Hair -->
+                                    <div class="w-20 h-10 bg-gray-800 rounded-t-full mx-auto -mt-20 relative z-10"></div>
+                                    <!-- Arms -->
+                                    <div class="absolute top-16 -left-8 w-6 h-16 bg-amber-200 rounded-full transform rotate-45"></div>
+                                    <div class="absolute top-16 -right-8 w-6 h-16 bg-amber-200 rounded-full transform -rotate-45"></div>
+                                </div>
+                            </div>
+
+                            <!-- Floating Icons -->
+                            <div class="absolute top-8 left-8 w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-chart-line text-blue-600"></i>
+                            </div>
+                            <div class="absolute top-16 right-8 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-book text-green-600"></i>
+                            </div>
+                            <div class="absolute bottom-16 left-12 w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-lightbulb text-yellow-600"></i>
+                            </div>
+                            <div class="absolute bottom-8 right-12 w-12 h-12 bg-red-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-users text-red-600"></i>
+                            </div>
+                            <div class="absolute top-1/2 left-4 w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-video text-indigo-600"></i>
+                            </div>
+                            <div class="absolute top-1/2 right-4 w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center shadow-lg">
+                                <i class="fas fa-certificate text-pink-600"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Background Decorations -->
+                    <div class="absolute top-0 left-0 w-16 h-16 bg-purple-200 rounded-full opacity-50 -z-10"></div>
+                    <div class="absolute bottom-0 right-0 w-24 h-24 bg-blue-200 rounded-full opacity-50 -z-10"></div>
+                    <div class="absolute top-1/2 -right-8 w-12 h-12 bg-yellow-200 rounded-full opacity-50 -z-10"></div>
+                </div>
+            </div>
+
+            <!-- Right Side - Form -->
+            <div class="bg-white rounded-3xl shadow-2xl p-8 lg:p-12">
+                <div class="mb-8">
+                    <h1 class="text-4xl font-bold text-gray-800 mb-4">Become an Instructor</h1>
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        Join our community of passionate educators and share your expertise with learners worldwide.
+                    </p>
+                </div>
+
+              {% if error %}
+                  <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    {{ error }}
+                  </div>
+              {% endif %}
+
+                <!-- Registration Form -->
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
+
+                    <!-- Full Name -->
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+                        <div class="relative">
+                            <input
+                                type="text"
+                                name="fullname"
+                                placeholder="Enter your full name"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-gray-50"
+                                required
+                            >
+                            <i class="fas fa-user absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                        <div class="relative">
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email address"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-gray-50"
+                                required
+                            >
+                            <i class="fas fa-envelope absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
+                        <div class="relative">
+                            <input
+                                type="tel"
+                                name="phone_no"
+                                placeholder="Enter your phone number"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-gray-50"
+                            >
+                            <i class="fas fa-phone absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Expertise Area -->
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Area of Expertise</label>
+                        <div class="relative">
+                            <select name="expertise_area" class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-gray-50" required>
+                                <option value="">Select your expertise</option>
+                                <option value="technology">Technology & Programming</option>
+                                <option value="business">Business & Finance</option>
+                                <option value="design">Design & Creative</option>
+                                <option value="marketing">Marketing & Sales</option>
+                                <option value="health">Health & Fitness</option>
+                                <option value="language">Language Learning</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter your Password"
+                                class="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none text-gray-700 bg-gray-50"
+                                required
+                            >
+                            <i class="fas fa-user absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button
+                        type="submit"
+                        class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                    >
+                        <i class="fas fa-rocket mr-2"></i>
+                        Start Teaching Today
+                    </button>
+
+                    <div class="mt-8">
+                        <div class="relative flex items-center justify-center">
+                            <div class="border-t border-gray-300 flex-grow"></div>
+                            <span class="bg-white px-4 text-gray-500 text-sm">Or continue with</span>
+                            <div class="border-t border-gray-300 flex-grow"></div>
+                        </div>
+
+                        <div class="flex justify-center space-x-4 mt-6">
+                            <button class="flex items-center justify-center w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-purple-500 transition-colors">
+                                <i class="fab fa-google text-red-500"></i>
+                            </button>
+                            <button class="flex items-center justify-center w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-purple-500 transition-colors">
+                                <i class="fab fa-facebook text-blue-600"></i>
+                            </button>
+                            <button class="flex items-center justify-center w-12 h-12 border-2 border-gray-200 rounded-lg hover:border-purple-500 transition-colors">
+                                <i class="fab fa-apple text-gray-800"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Terms and Login -->
+                    <div class="text-center text-sm text-gray-600 mt-6">
+                        <p>By signing up, you agree to our
+                            <a href="#" class="text-purple-600 hover:underline">Terms of Use</a> and
+                            <a href="#" class="text-purple-600 hover:underline">Privacy Policy</a>
+                        </p>
+                        <p class="mt-4">
+                            Already have an account?
+                            <a href="#" class="text-purple-600 hover:underline font-semibold">Log in</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+<div class="bg-white py-16 mt-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Teach With Us?</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-users text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Global Reach</h3>
+                    <p class="text-gray-600">Connect with millions of learners worldwide and share your knowledge globally.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-dollar-sign text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Earn Revenue</h3>
+                    <p class="text-gray-600">Monetize your expertise and earn passive income from your courses.</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-tools text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Powerful Tools</h3>
+                    <p class="text-gray-600">Access professional course creation tools and analytics to optimize your teaching.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>
